@@ -1,0 +1,236 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtu34gkuxs6cb"]
+
+[ext_resource type="Script" uid="uid://jdui6dneupau" path="res://scripts/settings_window.gd" id="1_kjo77"]
+[ext_resource type="Texture2D" uid="uid://cqmydyc3yswsx" path="res://assets/undo.png" id="2_iu22o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjo77"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.272655, 0.272655, 0.272655, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="FontVariation" id="FontVariation_kjo77"]
+variation_embolden = 0.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8eo4u"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_kjo77"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ni1d"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.378349, 0.580475, 0.277812, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iu22o"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.253333, 0.4, 0.18, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Window" type="Window" node_paths=PackedStringArray("loops_label", "loops_slider", "loop_time_label", "loop_time_slider", "pause_time_label", "pause_time_slider", "window_height_label", "window_height_slider")]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(250, 500)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+popup_window = true
+script = ExtResource("1_kjo77")
+loops_label = NodePath("Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer/LoopsLabel")
+loops_slider = NodePath("Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/LoopsSlider")
+loop_time_label = NodePath("Control/Panel/VBoxContainer/LoopTime/VBoxContainer/HBoxContainer/LoopTimeLabel")
+loop_time_slider = NodePath("Control/Panel/VBoxContainer/LoopTime/VBoxContainer/LoopTimeSlider")
+pause_time_label = NodePath("Control/Panel/VBoxContainer/PauseTime/VBoxContainer/HBoxContainer/PauseTimeLabel")
+pause_time_slider = NodePath("Control/Panel/VBoxContainer/PauseTime/VBoxContainer/PauseTimeSlider")
+window_height_label = NodePath("Control/Panel/VBoxContainer/WindowHeight/VBoxContainer/HBoxContainer/HeightValue")
+window_height_slider = NodePath("Control/Panel/VBoxContainer/WindowHeight/VBoxContainer/WindowHeightSlider")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjo77")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_kjo77")
+text = "SETTINGS"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="TextureButton" type="TextureButton" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+texture_normal = ExtResource("2_iu22o")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="LoopsForPause" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8eo4u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/LoopsForPause"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LoopsTitle" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Pause after "
+
+[node name="LoopsLabel" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "10"
+horizontal_alignment = 1
+
+[node name="LoopsTitle2" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = " loops"
+
+[node name="LoopsSlider" type="HSlider" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+ticks_on_borders = true
+
+[node name="LoopTime" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8eo4u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/LoopTime"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/LoopTime/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LoopTimeTitle" type="Label" parent="Control/Panel/VBoxContainer/LoopTime/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Loops every "
+
+[node name="LoopTimeLabel" type="Label" parent="Control/Panel/VBoxContainer/LoopTime/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "10"
+horizontal_alignment = 1
+
+[node name="LoopTimeSlider" type="HSlider" parent="Control/Panel/VBoxContainer/LoopTime/VBoxContainer"]
+layout_mode = 2
+min_value = 30.0
+max_value = 600.0
+step = 10.0
+value = 300.0
+
+[node name="PauseTime" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8eo4u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/PauseTime"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/PauseTime/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PauseTimeTitle" type="Label" parent="Control/Panel/VBoxContainer/PauseTime/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Pause for "
+
+[node name="PauseTimeLabel" type="Label" parent="Control/Panel/VBoxContainer/PauseTime/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "10"
+horizontal_alignment = 2
+
+[node name="PauseTimeSlider" type="HSlider" parent="Control/Panel/VBoxContainer/PauseTime/VBoxContainer"]
+layout_mode = 2
+min_value = 30.0
+max_value = 600.0
+step = 10.0
+value = 300.0
+
+[node name="WindowHeight" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8eo4u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/WindowHeight"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/WindowHeight/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeightLabel" type="Label" parent="Control/Panel/VBoxContainer/WindowHeight/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Window height : "
+
+[node name="HeightValue" type="Label" parent="Control/Panel/VBoxContainer/WindowHeight/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "10"
+horizontal_alignment = 2
+
+[node name="WindowHeightSlider" type="HSlider" parent="Control/Panel/VBoxContainer/WindowHeight/VBoxContainer"]
+layout_mode = 2
+value = 32.0
+
+[node name="SaveAndQuitButton" type="Button" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_kjo77")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7ni1d")
+theme_override_styles/normal = SubResource("StyleBoxFlat_iu22o")
+text = "SAVE
+"
+
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/SaveAndQuitButton" to="." method="_on_save_and_quit_pressed"]

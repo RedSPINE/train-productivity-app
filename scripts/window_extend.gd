@@ -1,0 +1,2 @@
+extends CollisionPolygon2D
+class_name WindowExtend

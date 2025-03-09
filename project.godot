@@ -1,0 +1,39 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="ProductiviTrain"
+config/version="v1.2"
+run/main_scene="uid://c2ctn6673xxjx"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="uid://4hpxqpf3uyh"
+
+[autoload]
+
+Events="*res://scripts/events_autoload.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=32
+window/size/initial_position=Vector2i(0, 992)
+window/size/resizable=false
+window/size/borderless=true
+window/size/always_on_top=true
+window/size/transparent=true
+window/subwindows/embed_subwindows=false
+window/per_pixel_transparency/allowed=true
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+viewport/transparent_background=true

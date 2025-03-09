@@ -1,0 +1,393 @@
+[gd_scene load_steps=27 format=3 uid="uid://c2ctn6673xxjx"]
+
+[ext_resource type="Script" uid="uid://d24spe7xnwcxl" path="res://scripts/train.gd" id="1_7ykc4"]
+[ext_resource type="Script" uid="uid://bwq1clc3kfgpl" path="res://scripts/game_manager.gd" id="1_c16ls"]
+[ext_resource type="Texture2D" uid="uid://dcrbx6s0ivpgk" path="res://assets/tgv-wagon.png" id="1_w2twt"]
+[ext_resource type="Script" uid="uid://bnoinmke2gamo" path="res://scripts/config.gd" id="2_6wevv"]
+[ext_resource type="Script" uid="uid://oyb1tlheqcyb" path="res://scripts/train_light.gd" id="2_18nlu"]
+[ext_resource type="Texture2D" uid="uid://dpliqlexaqdy1" path="res://assets/tgv.png" id="2_pw63i"]
+[ext_resource type="PackedScene" uid="uid://dtu34gkuxs6cb" path="res://scenes/settings_window.tscn" id="3_e1cbu"]
+[ext_resource type="Texture2D" uid="uid://barmeetipsd8a" path="res://assets/light.png" id="4_pu3yx"]
+[ext_resource type="Script" uid="uid://bsyfk8725kpf6" path="res://scripts/window_manager.gd" id="5_gubc5"]
+[ext_resource type="Script" uid="uid://cpsf6luq1u47r" path="res://scripts/window_extend.gd" id="5_rt2n2"]
+[ext_resource type="AudioStream" uid="uid://cs08sfnvvyali" path="res://assets/dingdingding.mp3" id="11_e1cbu"]
+[ext_resource type="AudioStream" uid="uid://bu2tagb0lvue5" path="res://assets/wheels.wav" id="12_mngbo"]
+
+[sub_resource type="Resource" id="Resource_e1cbu"]
+script = ExtResource("2_6wevv")
+loops_for_pause = 2
+loop_duration = 30.0
+pause_duration = 10.0
+window_height = 32
+metadata/_custom_type_script = "uid://bnoinmke2gamo"
+
+[sub_resource type="Animation" id="Animation_rt2n2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light-Red:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light-Green:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light-Yellow:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_18nlu"]
+resource_name = "go"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light-Red:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light-Green:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light-Yellow:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gubc5"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light-Red:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light-Green:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light-Yellow:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c1pb6"]
+resource_name = "stop"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light-Red:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light-Green:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light-Yellow:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rt2n2"]
+_data = {
+&"RESET": SubResource("Animation_rt2n2"),
+&"go": SubResource("Animation_18nlu"),
+&"idle": SubResource("Animation_gubc5"),
+&"stop": SubResource("Animation_c1pb6")
+}
+
+[sub_resource type="Gradient" id="Gradient_pu3yx"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gubc5"]
+gradient = SubResource("Gradient_pu3yx")
+width = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wevv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1cbu"]
+bg_color = Color(0.6, 0.354, 0.354, 0)
+
+[sub_resource type="Animation" id="Animation_pu3yx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Train:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7ykc4"]
+resource_name = "passing"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Train:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-300, 0), Vector2(2800, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Train")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_light_reached"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pu3yx"]
+_data = {
+&"RESET": SubResource("Animation_pu3yx"),
+&"passing": SubResource("Animation_7ykc4")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18nlu"]
+bg_color = Color(0.579597, 0.62, 0.4774, 0)
+corner_detail = 1
+anti_aliasing = false
+
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("light", "train")]
+script = ExtResource("1_c16ls")
+conf = SubResource("Resource_e1cbu")
+settings_scene = ExtResource("3_e1cbu")
+light = NodePath("Light")
+train = NodePath("Train")
+
+[node name="WindowManager" type="Node" parent="."]
+script = ExtResource("5_gubc5")
+
+[node name="Light" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "button")]
+position = Vector2(1904, 16)
+script = ExtResource("2_18nlu")
+animation_player = NodePath("AnimationPlayer")
+button = NodePath("Button")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Light"]
+libraries = {
+&"": SubResource("AnimationLibrary_rt2n2")
+}
+autoplay = "idle"
+
+[node name="Pole" type="Sprite2D" parent="Light"]
+texture_filter = 1
+texture = ExtResource("4_pu3yx")
+
+[node name="Light-Green" type="Sprite2D" parent="Light"]
+modulate = Color(0.221026, 0.698352, 0, 1)
+position = Vector2(0, -6)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture1D_gubc5")
+
+[node name="Light-Red" type="Sprite2D" parent="Light"]
+modulate = Color(0.82, 0, 0, 1)
+position = Vector2(0, -2)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture1D_gubc5")
+
+[node name="Light-Yellow" type="Sprite2D" parent="Light"]
+modulate = Color(0.821788, 0.498074, 0, 1)
+position = Vector2(0, 2)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture1D_gubc5")
+
+[node name="WindowExtend" type="CollisionPolygon2D" parent="Light"]
+visible = false
+polygon = PackedVector2Array(-4, -10, 4, -10, 4, 16, -4, 16)
+script = ExtResource("5_rt2n2")
+
+[node name="Button" type="Button" parent="Light"]
+custom_minimum_size = Vector2(8, 26)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxFlat_6wevv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_e1cbu")
+
+[node name="Train" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "button", "audiostream_ding", "audiostream_wheels")]
+scale = Vector2(2, 2)
+script = ExtResource("1_7ykc4")
+speed = 0.75
+animation_player = NodePath("TrainAnimationPlayer")
+button = NodePath("Button")
+audiostream_ding = NodePath("AudioStream-Ding")
+audiostream_wheels = NodePath("AudioStream-Wheels")
+
+[node name="TrainAnimationPlayer" type="AnimationPlayer" parent="Train"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_pu3yx")
+}
+
+[node name="Locomotive" type="Sprite2D" parent="Train"]
+texture_filter = 1
+position = Vector2(-32, 0)
+texture = ExtResource("2_pw63i")
+
+[node name="Wagon1" type="Sprite2D" parent="Train"]
+texture_filter = 1
+position = Vector2(-96, 0)
+texture = ExtResource("1_w2twt")
+
+[node name="Wagon2" type="Sprite2D" parent="Train"]
+texture_filter = 1
+position = Vector2(-160, 0)
+texture = ExtResource("1_w2twt")
+
+[node name="Wagon3" type="Sprite2D" parent="Train"]
+texture_filter = 1
+position = Vector2(-224, 0)
+texture = ExtResource("1_w2twt")
+
+[node name="Locomotive2" type="Sprite2D" parent="Train"]
+texture_filter = 1
+position = Vector2(-287.5, 0)
+texture = ExtResource("2_pw63i")
+flip_h = true
+
+[node name="WindowExtend" type="CollisionPolygon2D" parent="Train"]
+polygon = PackedVector2Array(-320, 2, 0, 2, 0, 16, -320, 16)
+script = ExtResource("5_rt2n2")
+
+[node name="Button" type="Button" parent="Train"]
+offset_left = -320.0
+offset_top = 2.0
+offset_bottom = 16.0
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_18nlu")
+
+[node name="AudioStream-Ding" type="AudioStreamPlayer2D" parent="Train"]
+stream = ExtResource("11_e1cbu")
+
+[node name="AudioStream-Wheels" type="AudioStreamPlayer2D" parent="Train"]
+position = Vector2(-162.5, 0)
+stream = ExtResource("12_mngbo")
+volume_db = -6.0
+pitch_scale = 2.0
+max_distance = 1920.0

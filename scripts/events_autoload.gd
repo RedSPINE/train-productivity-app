@@ -8,6 +8,7 @@ var config : Config:
 			config = Config.new().load_save()
 		return config
 
+var window_length: int = 0
 
 # Config
 signal height_changed(new_value: int)
@@ -18,3 +19,5 @@ signal train_paused
 signal train_resumed
 # Light
 signal light_button_pressed
+# Other
+signal window_adjusted

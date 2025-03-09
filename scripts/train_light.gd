@@ -6,6 +6,8 @@ class_name TrainLight
 
 func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
+	Events.window_adjusted.connect(_on_window_adjusted)
+	_on_window_adjusted()
 
 func _on_button_pressed() -> void:
 	Events.light_button_pressed.emit()
@@ -18,3 +20,6 @@ func go() -> void:
 
 func stop() -> void:
 	animation_player.play("stop")
+
+func _on_window_adjusted() -> void:
+	global_position.x = Events.window_length - 25

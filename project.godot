@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ProductiviTrain"
-config/version="v1.2"
+config/version="1.2"
 run/main_scene="uid://c2ctn6673xxjx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://4hpxqpf3uyh"

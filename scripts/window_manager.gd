@@ -1,26 +1,29 @@
 extends Node
 class_name WindowMananger
 
-
-
 const WINDOW_SIZE = 32
-@onready var game_manager = $".."
+
+var screen_length: int = 0
+var screen_height: int = 0
+
 var collision_shapes: Array[WindowExtend] = []
 
 
 ## Called after everything is instantiated.
 func _ready() -> void:
-	adjust_window_height(Events.config.window_height)
-	Events.height_changed.connect(adjust_window_height)
+	adjust_window(Events.config.window_height)
+	Events.height_changed.connect(adjust_window)
 	for child in get_tree().root.get_children(true):
 		_recursive_get_polygon_children(child)
 
 
-func adjust_window_height(value: int) -> void:
+func adjust_window(bonus_height: int) -> void:
 	var prim_index = DisplayServer.get_primary_screen()
-	get_window().position.y = DisplayServer.screen_get_size(prim_index).y\
-	 - WINDOW_SIZE\
-	 - value
+	screen_length = DisplayServer.screen_get_size(prim_index).x
+	screen_height = DisplayServer.screen_get_size(prim_index).y
+	get_window().position.y = screen_height - WINDOW_SIZE - bonus_height
+	Events.window_length = screen_length
+	Events.window_adjusted.emit()
 
 
 func _recursive_get_polygon_children(node: Node) -> void:

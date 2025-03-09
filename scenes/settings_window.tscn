@@ -45,7 +45,7 @@ corner_radius_bottom_left = 4
 [node name="Window" type="Window" node_paths=PackedStringArray("loops_label", "loops_slider", "loop_time_label", "loop_time_slider", "pause_time_label", "pause_time_slider", "window_height_label", "window_height_slider")]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(250, 500)
+size = Vector2i(250, 385)
 unresizable = true
 borderless = true
 always_on_top = true

@@ -19,7 +19,9 @@ var loop_timer: float = .0
 ## Called after everything is instantiated.
 func _ready() -> void:
 	# Setup internal var
-	if not conf or not Engine.is_editor_hint():
+	if conf and OS.has_feature("editor"):
+		pass
+	else:
 		_update_values()
 	loop_timer = conf.loop_duration
 	loop_count = -1 # first passing doesn't count towards loop
@@ -36,7 +38,7 @@ func _physics_process(delta) -> void:
 	# Update internal counter
 	if not is_pause:
 		loop_timer += delta
-	elif pause_timer < conf.pause_duration:
+	elif pause_timer < conf.pause_duration and not train.can_resume:
 		pause_timer += delta
 		train.can_resume = pause_timer >= conf.pause_duration
 		if train.can_resume:

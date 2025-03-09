@@ -2,7 +2,7 @@ extends Node
 class_name EventsAutoload
 
 
-var config : Config:
+var config: Config:
 	get:
 		if config == null:
 			config = Config.new().load_save()

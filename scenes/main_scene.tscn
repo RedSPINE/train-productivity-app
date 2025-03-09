@@ -15,9 +15,9 @@
 
 [sub_resource type="Resource" id="Resource_e1cbu"]
 script = ExtResource("2_6wevv")
-loops_for_pause = 2
-loop_duration = 30.0
-pause_duration = 10.0
+loops_for_pause = 0
+loop_duration = 10.0
+pause_duration = 5.0
 window_height = 32
 metadata/_custom_type_script = "uid://bnoinmke2gamo"
 

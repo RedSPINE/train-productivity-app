@@ -21,6 +21,8 @@ func adjust_window(bonus_height: int) -> void:
 	var prim_index = DisplayServer.get_primary_screen()
 	screen_length = DisplayServer.screen_get_size(prim_index).x
 	screen_height = DisplayServer.screen_get_size(prim_index).y
+	get_window().size.x = screen_length
+	get_window().initial_position = Window.WINDOW_INITIAL_POSITION_ABSOLUTE
 	get_window().position.y = screen_height - WINDOW_SIZE - bonus_height
 	Events.window_length = screen_length
 	Events.window_adjusted.emit()

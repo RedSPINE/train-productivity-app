@@ -42,10 +42,10 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="Window" type="Window" node_paths=PackedStringArray("loops_label", "loops_slider", "loop_time_label", "loop_time_slider", "pause_time_label", "pause_time_slider", "window_height_label", "window_height_slider")]
+[node name="Window" type="Window" node_paths=PackedStringArray("loops_label", "loops_slider", "loop_time_label", "loop_time_slider", "preview_label", "pause_time_label", "pause_time_slider", "window_height_label", "window_height_slider")]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(250, 385)
+size = Vector2i(350, 450)
 unresizable = true
 borderless = true
 always_on_top = true
@@ -56,6 +56,7 @@ loops_label = NodePath("Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/
 loops_slider = NodePath("Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/LoopsSlider")
 loop_time_label = NodePath("Control/Panel/VBoxContainer/LoopTime/VBoxContainer/HBoxContainer/LoopTimeLabel")
 loop_time_slider = NodePath("Control/Panel/VBoxContainer/LoopTime/VBoxContainer/LoopTimeSlider")
+preview_label = NodePath("Control/Panel/VBoxContainer/Preview/PreviewLabel")
 pause_time_label = NodePath("Control/Panel/VBoxContainer/PauseTime/VBoxContainer/HBoxContainer/PauseTimeLabel")
 pause_time_slider = NodePath("Control/Panel/VBoxContainer/PauseTime/VBoxContainer/PauseTimeSlider")
 window_height_label = NodePath("Control/Panel/VBoxContainer/WindowHeight/VBoxContainer/HBoxContainer/HeightValue")
@@ -120,7 +121,7 @@ theme_override_constants/separation = 0
 [node name="LoopsTitle" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "Pause after "
+text = "Train passings before pause : "
 
 [node name="LoopsLabel" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -131,12 +132,11 @@ horizontal_alignment = 1
 [node name="LoopsTitle2" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = " loops"
 
 [node name="LoopsSlider" type="HSlider" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer"]
 layout_mode = 2
 min_value = 1.0
-max_value = 10.0
+max_value = 50.0
 value = 5.0
 ticks_on_borders = true
 
@@ -154,7 +154,7 @@ theme_override_constants/separation = 0
 [node name="LoopTimeTitle" type="Label" parent="Control/Panel/VBoxContainer/LoopTime/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "Loops every "
+text = "The train will pass every "
 
 [node name="LoopTimeLabel" type="Label" parent="Control/Panel/VBoxContainer/LoopTime/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -166,8 +166,19 @@ horizontal_alignment = 1
 layout_mode = 2
 min_value = 30.0
 max_value = 600.0
-step = 10.0
+step = 30.0
 value = 300.0
+
+[node name="Preview" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8eo4u")
+
+[node name="PreviewLabel" type="Label" parent="Control/Panel/VBoxContainer/Preview"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Time between each pause
+%l × %d = %t"
+horizontal_alignment = 1
 
 [node name="PauseTime" type="PanelContainer" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
@@ -183,7 +194,7 @@ theme_override_constants/separation = 0
 [node name="PauseTimeTitle" type="Label" parent="Control/Panel/VBoxContainer/PauseTime/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "Pause for "
+text = "Pause duration : "
 
 [node name="PauseTimeLabel" type="Label" parent="Control/Panel/VBoxContainer/PauseTime/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -193,9 +204,9 @@ horizontal_alignment = 2
 
 [node name="PauseTimeSlider" type="HSlider" parent="Control/Panel/VBoxContainer/PauseTime/VBoxContainer"]
 layout_mode = 2
-min_value = 30.0
-max_value = 600.0
-step = 10.0
+min_value = 60.0
+max_value = 900.0
+step = 60.0
 value = 300.0
 
 [node name="WindowHeight" type="PanelContainer" parent="Control/Panel/VBoxContainer"]

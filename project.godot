@@ -22,9 +22,9 @@ Events="*res://scripts/events_autoload.gd"
 
 [display]
 
-window/size/viewport_width=1920
+window/size/viewport_width=2560
 window/size/viewport_height=32
-window/size/initial_position=Vector2i(0, 992)
+window/size/initial_position=Vector2i(1920, 992)
 window/size/resizable=false
 window/size/borderless=true
 window/size/always_on_top=true

@@ -4,10 +4,16 @@ class_name SettingsWindow
 
 @export var loops_label: Label
 @export var loops_slider: HSlider
+
 @export var loop_time_label: Label
 @export var loop_time_slider: HSlider
+
+@export var preview_label: Label
+var preview_base_text: String
+
 @export var pause_time_label: Label
 @export var pause_time_slider: HSlider
+
 @export var window_height_label: Label
 @export var window_height_slider: HSlider
 
@@ -19,6 +25,7 @@ func _ready():
 	close_requested.connect(_on_close_requested)
 	loops_slider.value_changed.connect(_on_slider_value_changed)
 	loop_time_slider.value_changed.connect(_on_slider_value_changed)
+	preview_base_text = preview_label.text
 	pause_time_slider.value_changed.connect(_on_slider_value_changed)
 	window_height_slider.value_changed.connect(_on_slider_value_changed)
 	# Update
@@ -57,19 +64,16 @@ func _on_slider_value_changed(_value: float) -> void:
 
 
 func _update() -> void:
-	loops_label.text = str(loops_slider.value as int)
+	var loop_count = loops_slider.value as int
+	loops_label.text = str(loop_count)
 	# loop time
-	var minutes: int = int(loop_time_slider.value)/60
-	var seconds: int = int(loop_time_slider.value)%60
-	var str_min = "" if minutes == 0 else str(minutes)+"min "
-	var str_s = "" if seconds == 0 else str(seconds)+"s"
-	loop_time_label.text = str_min + str_s
+	var loop_duration = loop_time_slider.value
+	loop_time_label.text = seconds_to_text(int(loop_duration))
+	# preview
+	var total_duration = loop_count * loop_duration
+	preview_label.text = preview_base_text.replace("%l",loops_label.text).replace("%d",pause_time_label.text).replace("%t", seconds_to_text(total_duration))
 	# pause_time
-	minutes = int(pause_time_slider.value)/60
-	seconds = int(pause_time_slider.value)%60
-	str_min = "" if minutes == 0 else str(minutes)+"min "
-	str_s = "" if seconds == 0 else str(seconds)+"s"
-	pause_time_label.text = str_min + str_s
+	pause_time_label.text = seconds_to_text(int(pause_time_slider.value))
 	
 	var height_value = window_height_slider.value
 	window_height_label.text = str(int(window_height_slider.value))+"px"
@@ -78,3 +82,24 @@ func _update() -> void:
 
 func _on_texture_button_pressed():
 	_reset_values()
+
+
+func seconds_to_text(seconds: int) -> String:
+	## Compute time
+	var hours: int = int(seconds)/3600
+	seconds -= hours * 3600
+	var minutes: int = int(seconds)/60
+	seconds -= minutes * 60
+	seconds = seconds % 60
+	
+	var time = ""
+	## Write time
+	if hours > 0:
+		time += str(hours)+"h "
+	if minutes > 0:
+		time += str(minutes)+"min "
+	if seconds > 0:
+		time += str(seconds)+"s"
+	
+	return time
+	

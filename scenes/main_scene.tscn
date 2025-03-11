@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c2ctn6673xxjx"]
+[gd_scene load_steps=28 format=3 uid="uid://c2ctn6673xxjx"]
 
 [ext_resource type="Script" uid="uid://d24spe7xnwcxl" path="res://scripts/train.gd" id="1_7ykc4"]
 [ext_resource type="Script" uid="uid://bwq1clc3kfgpl" path="res://scripts/game_manager.gd" id="1_c16ls"]
@@ -205,6 +205,9 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1cbu"]
 bg_color = Color(0.6, 0.354, 0.354, 0)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mngbo"]
+size = Vector2(229, 26)
+
 [sub_resource type="Animation" id="Animation_pu3yx"]
 length = 0.001
 tracks/0/type = "value"
@@ -325,14 +328,25 @@ focus_mode = 0
 theme_override_styles/hover = SubResource("StyleBoxFlat_6wevv")
 theme_override_styles/normal = SubResource("StyleBoxFlat_e1cbu")
 
-[node name="Train" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "button", "audiostream_ding", "audiostream_wheels")]
+[node name="Area2D" type="Area2D" parent="Light"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/Area2D"]
+position = Vector2(-49.5, 3)
+shape = SubResource("RectangleShape2D_mngbo")
+
+[node name="Train" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "button", "audiostream_ding", "audiostream_wheels", "window_extend")]
 scale = Vector2(2, 2)
 script = ExtResource("1_7ykc4")
-speed = 0.75
+use_anim = false
+speed = 600.0
 animation_player = NodePath("TrainAnimationPlayer")
 button = NodePath("Button")
 audiostream_ding = NodePath("AudioStream-Ding")
 audiostream_wheels = NodePath("AudioStream-Wheels")
+window_extend = NodePath("Area2D/WindowExtend")
 
 [node name="TrainAnimationPlayer" type="AnimationPlayer" parent="Train"]
 root_node = NodePath("../..")
@@ -366,10 +380,6 @@ position = Vector2(-287.5, 0)
 texture = ExtResource("2_pw63i")
 flip_h = true
 
-[node name="WindowExtend" type="CollisionPolygon2D" parent="Train"]
-polygon = PackedVector2Array(-320, 2, 0, 2, 0, 16, -320, 16)
-script = ExtResource("5_rt2n2")
-
 [node name="Button" type="Button" parent="Train"]
 offset_left = -320.0
 offset_top = 2.0
@@ -391,3 +401,14 @@ stream = ExtResource("12_mngbo")
 volume_db = -6.0
 pitch_scale = 2.0
 max_distance = 1920.0
+
+[node name="Area2D" type="Area2D" parent="Train"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="WindowExtend" type="CollisionPolygon2D" parent="Train/Area2D"]
+polygon = PackedVector2Array(-320, 2, 0, 2, 0, 16, -320, 16)
+script = ExtResource("5_rt2n2")
+
+[connection signal="area_entered" from="Train/Area2D" to="Train" method="_on_area_2d_area_entered"]

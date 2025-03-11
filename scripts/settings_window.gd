@@ -71,7 +71,7 @@ func _update() -> void:
 	loop_time_label.text = seconds_to_text(int(loop_duration))
 	# preview
 	var total_duration = loop_count * loop_duration
-	preview_label.text = preview_base_text.replace("%l",loops_label.text).replace("%d",pause_time_label.text).replace("%t", seconds_to_text(total_duration))
+	preview_label.text = preview_base_text.replace("%l",str(loop_count)).replace("%d",seconds_to_text(loop_duration)).replace("%t", seconds_to_text(total_duration))
 	# pause_time
 	pause_time_label.text = seconds_to_text(int(pause_time_slider.value))
 	

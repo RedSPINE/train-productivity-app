@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtu34gkuxs6cb"]
+[gd_scene load_steps=10 format=3 uid="uid://dtu34gkuxs6cb"]
 
 [ext_resource type="Script" uid="uid://jdui6dneupau" path="res://scripts/settings_window.gd" id="1_kjo77"]
 [ext_resource type="Texture2D" uid="uid://cqmydyc3yswsx" path="res://assets/undo.png" id="2_iu22o"]
+[ext_resource type="Script" uid="uid://22u08bcxkvc3" path="res://scenes/rich_text_label.gd" id="3_pyh1h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjo77"]
 content_margin_left = 20.0
-content_margin_top = 20.0
 content_margin_right = 20.0
-content_margin_bottom = 20.0
+content_margin_bottom = 12.0
 bg_color = Color(0.272655, 0.272655, 0.272655, 1)
 border_width_left = 8
 border_width_top = 8
@@ -45,7 +45,7 @@ corner_radius_bottom_left = 4
 [node name="Window" type="Window" node_paths=PackedStringArray("loops_label", "loops_slider", "loop_time_label", "loop_time_slider", "preview_label", "pause_time_label", "pause_time_slider", "window_height_label", "window_height_slider")]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(350, 450)
+size = Vector2i(350, 405)
 unresizable = true
 borderless = true
 always_on_top = true
@@ -77,15 +77,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -1.5
-offset_bottom = 1.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kjo77")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
@@ -94,7 +92,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_kjo77")
-text = "SETTINGS"
+text = "Settings"
 horizontal_alignment = 1
 uppercase = true
 
@@ -121,7 +119,7 @@ theme_override_constants/separation = 0
 [node name="LoopsTitle" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "Train passings before pause : "
+text = "The train passes "
 
 [node name="LoopsLabel" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -132,6 +130,7 @@ horizontal_alignment = 1
 [node name="LoopsTitle2" type="Label" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
+text = " times before pause"
 
 [node name="LoopsSlider" type="HSlider" parent="Control/Panel/VBoxContainer/LoopsForPause/VBoxContainer"]
 layout_mode = 2
@@ -176,7 +175,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8eo4u")
 [node name="PreviewLabel" type="Label" parent="Control/Panel/VBoxContainer/Preview"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "Time between each pause
+text = "Time between each pause :
 %l × %d = %t"
 horizontal_alignment = 1
 
@@ -243,5 +242,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_iu22o")
 text = "SAVE
 "
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "made with love by [color=pink][url=https://bsky.app/profile/redspine.bsky.social]@redspine[/url][/color]"
+fit_content = true
+scroll_active = false
+tab_size = 24
+horizontal_alignment = 2
+script = ExtResource("3_pyh1h")
+
 [connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/SaveAndQuitButton" to="." method="_on_save_and_quit_pressed"]
+[connection signal="meta_clicked" from="Control/Panel/RichTextLabel" to="Control/Panel/RichTextLabel" method="_on_meta_clicked"]

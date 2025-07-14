@@ -1,4 +1,5 @@
-    ProductiviTrain  by Red C is marked CC0 1.0. To view a copy of this mark, visit https://creativecommons.org/publicdomain/zero/1.0/
+*Protected under the French author's right.
+This work is openly licensed via CC BY NS SA 4.0.*
 
 Download on itch.io :
 https://redspine.itch.io/productivitrain
